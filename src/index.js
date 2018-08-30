@@ -4,8 +4,11 @@ import ReactDOM from 'react-dom';
 import './reset.css';
 import './index.css';
 
-import App from './components/App';
+import Game from './components/game';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Game />,
+  document.getElementById('root')
+);
 registerServiceWorker();

@@ -1,23 +1,15 @@
 import React from 'react';
 
-import Modal from './modal';
+import TopNav from './top-nav';
+import InfoModal from './info-modal';
 
 import './header.css';
 
-export default function Header() {
+export default function Header(props) {
   return (
     <header className="header">
-      <nav>
-        <ul className="clearfix">
-          <li>
-            <a className="what" href="#">What ?</a>
-          </li>
-          <li>
-            <a className="new" href="#">+ New Game</a>
-          </li>
-        </ul>
-      </nav>
-      <Modal />
+      <TopNav />
+      {/* <InfoModal /> */}
       <h1>HOT or COLD</h1>
     </header>
   );

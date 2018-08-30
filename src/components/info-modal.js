@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './modal.css';
+import './info-modal.css';
 
 export default function Modal() {
   return (
