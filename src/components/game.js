@@ -84,7 +84,6 @@ export default class Game extends React.Component {
   }
 
   resetGame() {
-    console.log('resetGame ran!');
     this.setState({
       guesses: [],
       currentGuess: '',
@@ -94,7 +93,6 @@ export default class Game extends React.Component {
   }
 
   toggleInfo() {
-    console.log('toggleInfo ran!')
     this.setState({
       toggleModal: !this.state.toggleModal
     })

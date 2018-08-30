@@ -5,7 +5,7 @@ import './info-modal.css';
 export default function Modal(props) {
 	if(props.showInfo) {
 		return (
-			<div className="overlay" id="modal" style={{display : 'block'}}>
+			<div className="overlay" id="modal" style={{opacity: 1, visibility: 'visible'}}>
 					<div className="content">
 						<h3>What do I do?</h3>
 						<div>
