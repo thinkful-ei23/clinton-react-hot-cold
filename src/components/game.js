@@ -15,57 +15,58 @@ export default class Game extends React.Component {
       currentGuess: '',
       feedback: 'Make your Guess!',
       secretNumber: generateNumber(),
-      toggleModal: false
+      showModal: false
     };
   }
 
   handleGuess(e) {
     e.preventDefault();
-    if (this.validateGuess()) {
+    if (this.validateGuess(this.state.currentGuess)) {
       this.setState({
         guesses: [...this.state.guesses, this.state.currentGuess]
       });
-      this.generateFeedback();
+      this.generateFeedback(this.state.secretNumber, this.state.currentGuess);
     }
     this.setState({
       currentGuess: ''
     })
   }
 
-  validateGuess() {
-    if (this.state.currentGuess % 1 !== 0) {
+  validateGuess(currentGuess) {
+    if (currentGuess % 1 !== 0) {
       alert('Please input a number');
       return false;
-    } else if (this.state.currentGuess < 0 || this.state.currentGuess > 100) {
+    } else if (currentGuess < 0 || currentGuess > 100) {
       alert('Please choose a number between zero and 100');
       return false;
     } else if (this.state.guesses.length > 0) {
       let alreadyGuessed = true;
       this.state.guesses.forEach(guess => {
-        if (Number(this.state.currentGuess) == guess) {
+        if (currentGuess === guess) {
           alert('You guessed this number already');
           alreadyGuessed = false;
         }
       })
       return alreadyGuessed;
+    } else {
+      return true;
     }
-    return true;
   }
 
-  generateFeedback() {
-    if(this.state.secretNumber === Number(this.state.currentGuess)){
+  generateFeedback(secretNumber, currentGuess) {
+    if(secretNumber === currentGuess){
       this.setState({
         feedback: 'You Won. Click new game to play again'
       });
-    } else if(Math.abs(this.state.secretNumber - Number(this.state.currentGuess)) < 10){
+    } else if(Math.abs(secretNumber - currentGuess) < 10){
       this.setState({
         feedback: 'Hot'
       });
-    } else if(Math.abs(this.state.secretNumber - Number(this.state.currentGuess)) < 20 && Math.abs(this.state.secretNumber - Number(this.state.currentGuess)) > 9){
+    } else if(Math.abs(secretNumber - currentGuess) < 20 && Math.abs(secretNumber - currentGuess) > 9){
       this.setState({
         feedback: 'Kinda hot'
       });
-    } else if(Math.abs(this.state.secretNumber - Number(this.state.currentGuess)) < 30 && Math.abs(this.state.secretNumber - Number(this.state.currentGuess)) > 19){
+    } else if(Math.abs(secretNumber - currentGuess) < 30 && Math.abs(secretNumber - currentGuess) > 19){
       this.setState({
         feedback: 'Less than warm'
       });
@@ -77,7 +78,7 @@ export default class Game extends React.Component {
   }
 
   onChange(e) {
-    const currentGuess = e.target.value;
+    const currentGuess = Number(e.target.value);
     this.setState({
       currentGuess
     });
@@ -88,22 +89,30 @@ export default class Game extends React.Component {
       guesses: [],
       currentGuess: '',
       feedback: 'Make your Guess!',
-      secretNumber: generateNumber()
+      secretNumber: generateNumber(),
+      showModal: false
     })
   }
 
-  toggleInfo() {
+  toggleModal() {
     this.setState({
-      toggleModal: !this.state.toggleModal
+      showModal: !this.state.showModal
     })
   }
 
   render () {
     return (
       <div>
-        <Header resetGame={() => this.resetGame()} toggleInfo={() => this.toggleInfo()} showInfo={this.state.toggleModal} />
+        <Header
+          resetGame={() => this.resetGame()}
+          toggleModal={() => this.toggleModal()}
+          showInfo={this.state.showModal} />
         <div className="game">
-          <GuessSection feedback={this.state.feedback} onChange={(e) => this.onChange(e) } handleGuess={(e)=> this.handleGuess(e)} value={this.state.currentGuess} />
+          <GuessSection
+            feedback={this.state.feedback}
+            onChange={(e) => this.onChange(e) }
+            handleGuess={(e)=> this.handleGuess(e)}
+            value={this.state.currentGuess} />
           <GuessCount count={this.state.guesses.length} />
           <GuessList guesses={this.state.guesses} />
         </div>

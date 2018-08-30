@@ -7,7 +7,7 @@ export default function TopNav(props) {
     <nav>
       <ul className="clearfix">
         <li>
-          <a className="what" href="#" onClick={props.toggleInfo} >What ?</a>
+          <a className="what" href="#" onClick={props.toggleModal} >What ?</a>
         </li>
         <li>
           <a className="new" href="#" onClick={props.resetGame} >+ New Game</a>

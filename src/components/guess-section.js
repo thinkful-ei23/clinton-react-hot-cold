@@ -5,18 +5,17 @@ import GuessForm from './guess-form';
 import './guess-section.css';
 
 export default function GuessSection(props) {
+  let mainDisplay = (
+    <GuessForm onChange={props.onChange}
+      handleGuess={props.handleGuess} value={props.value} />
+  );
   if(props.feedback === 'You Won. Click new game to play again') {
-    return (
-      <section>
-        <h2 id="feedback">{props.feedback}</h2>
-        <p>Game Over.</p>
-      </section>
-    );
+    mainDisplay = (<p style={{fontSize: '4em'}}>Game Over.</p>);
   }
   return (
-    <section>
+    <section className="guess-section">
       <h2 id="feedback">{props.feedback}</h2>
-      <GuessForm onChange={props.onChange} handleGuess={props.handleGuess} value={props.value} />
+      {mainDisplay}
     </section>
   );
 }
