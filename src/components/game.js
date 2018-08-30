@@ -42,7 +42,7 @@ export default class Game extends React.Component {
     } else if (this.state.guesses.length > 0) {
       let alreadyGuessed = true;
       this.state.guesses.forEach(guess => {
-        if (currentGuess === guess) {
+        if (currentGuess == guess) {
           alert('You guessed this number already');
           alreadyGuessed = false;
         }
@@ -54,7 +54,7 @@ export default class Game extends React.Component {
   }
 
   generateFeedback(secretNumber, currentGuess) {
-    if(secretNumber === currentGuess){
+    if(secretNumber == currentGuess){
       this.setState({
         feedback: 'You Won. Click new game to play again'
       });
@@ -78,7 +78,7 @@ export default class Game extends React.Component {
   }
 
   onChange(e) {
-    const currentGuess = Number(e.target.value);
+    const currentGuess = e.target.value;
     this.setState({
       currentGuess
     });
