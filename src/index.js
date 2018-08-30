@@ -6,9 +6,10 @@ import './index.css';
 
 import Game from './components/game';
 import registerServiceWorker from './registerServiceWorker';
+import generateNumber from '../generateNumber';
 
 ReactDOM.render(
-  <Game />,
+  <Game secretNumber={generateNumber()}/>,
   document.getElementById('root')
 );
 registerServiceWorker();
